@@ -61,6 +61,7 @@ var education = {
 			"url" : "http://www.udacity.com"
 		}
 	]
+
 }
 
 var work = {
@@ -76,7 +77,7 @@ var work = {
 			"title" : "Director of Promotions and Productions",
 			"location" : "Pittsburgh",
 			"dates" : "August 2012 - May 2014",
-			"description" : "I coordinated the rebranding of the station, resulting in winning Best Station Imaging in the nation by College Broadcasters Inc. My branding work includes on-air promos giving identity to the station, videos including one aired on MTV and one gaining over 250,000 views on YouTube. Under my leadership WPTS Radio increased in Facebook Likes by 125% and in Twitter followers by 50%. I was responsible for managing multiple 10 - 20 people groups as Director. I energized and instructed peers on audio and video recording, content creation, and event coordination. My favorite event I led involved bringing a penguin to campus as an educational presentation. I also hosted a stand up comedy show where I interviewed many famous comedians including Eddie Izzard, Bill Burr and Steven Wright."
+			"description" : "I coordinated the rebranding of the station, resulting in winning Best Station Imaging in the nation by College Broadcasters Inc. My branding work includes on-air promos giving identity to the station, videos including one aired on MTV and one gaining over 250,000 views on YouTube. Under my leadership WPTS Radio increased in Facebook Likes by 125% and in Twitter followers by 50%. I was responsible for managing multiple groups of 10 - 20 people. I energized and instructed peers on audio and video recording, content creation, and event coordination. My favorite event I led involved bringing a penguin to campus as an educational presentation. I also hosted a stand up comedy show where I interviewed many famous comedians including Eddie Izzard, Bill Burr and Steven Wright."
 	},
 	{		"employer" : "Technology Services at the University of Pittsburgh",
 			"title" : "Senior Computer Lab Consultant",
@@ -166,4 +167,29 @@ function displayProjects() {
 }
 displayProjects();
 
+function displayEducation() {
+	for ( counter in education.schools) {
+		$("#education").append(HTMLschoolStart);
+
+		var formattedSchool = HTMLschoolName.replace("%data%", education.schools[counter].name);
+			$(".education-entry:last").append(formattedSchool);
+		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[counter].degree);
+			$(".education-entry:last").append(formattedDegree);
+		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[counter].dates);
+			$(".education-entry:last").append(formattedDates);
+	 	var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[counter].location);
+			$(".education-entry:last").append(formattedLocation);
+
+		if (education.schools[counter].majors.length > 0){
+			for (major in education.schools[counter].majors){
+				var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[counter].majors[major]);
+				$(".education-entry:last").append(formattedMajor);
+			}
+		}
+		
+	}
+}
+displayEducation();
+
 $("#mapDiv").append(googleMap);
+
