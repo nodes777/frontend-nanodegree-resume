@@ -39,9 +39,6 @@ $("#header").append(formattedWelcomeMsg);
 var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
 $("#header").append(formattedBioPic);
 
-//$("#main").append(bio.name);
-//$("#main").append(bio.role);
-
 var education = {
 	"schools": [
 		{
@@ -57,11 +54,43 @@ var education = {
 		{
 			"title" : "Front End Web Developer",
 			"school" : "Udacity",
-			"date" : 2015,
+			"dates" : 2015,
 			"url" : "http://www.udacity.com"
 		}
-	]
+	],
+		display: function(){
+	for ( counter in education.schools) {
+			$("#education").append(HTMLschoolStart);
 
+			var formattedSchool = HTMLschoolName.replace("%data%", education.schools[counter].name);
+				$(".education-entry:last").append(formattedSchool);
+			var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[counter].degree);
+				$(".education-entry:last").append(formattedDegree);
+			var formattedDates = HTMLschoolDates.replace("%data%", education.schools[counter].dates);
+				$(".education-entry:last").append(formattedDates);
+		 	var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[counter].location);
+				$(".education-entry:last").append(formattedLocation);
+
+			if (education.schools[counter].majors.length > 0){
+				for (major in education.schools[counter].majors){
+					var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[counter].majors[major]);
+					$(".education-entry:last").append(formattedMajor);
+				}
+			}
+			
+		}
+		for ( counter in education.onlineCourses) {
+				$(".education-entry:last").append(HTMLonlineClasses);
+			var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[counter].title);
+				$(".education-entry:last").append(formattedTitle);
+			var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[counter].school);
+				$(".education-entry:last").append(formattedSchool);
+			var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[counter].dates);
+				$(".education-entry:last").append(formattedDates);
+			var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[counter].url);
+				$(".education-entry:last").append(formattedURL);
+		}
+	}
 }
 
 var work = {
@@ -91,41 +120,9 @@ var work = {
 			"dates" : "August 2014 - December 2014",
 			"description" : "As a Lab Assistant in one of the premiere arachnid labratories, I conducted behavioral assays on Agelonopsis Actuosa, Dolomedes Triton and Temnothorax Curvispinosis. Data from my research is being compiled into academic research papers on disease transfer in sexually cannablisitc spiders and personality research on ants at the individual and colony level. I also maintained animal enclosures and captured Agelnopsis and Dolemedes in the field. Data entry and microscopy were skills used regularly in the lab."
 	}			
-			]
-}
-
-var projects = {
-	"projects" : [
-	{
-		"title" : "Technology Consultant for Bespoke Delivery",
-		"dates" : "October 2014 - Ongoing",
-		"description" : "Developed online ordering system for start up Bespoke Delivery, a meal delivery service on bicycles",
-		"images" : ["http://i.imgur.com/Wfr9NXC.gif", "http://i.imgur.com/Wfr9NXC.gif", 
-				"http://i.imgur.com/Wfr9NXC.gif"]
-	},
-	{
-		"title" : "Pepper Box Driver",
-		"dates" : "Monday 2014 - Ongoing",
-		"description" : "Started the festival",
-		"images" : ["http://i.imgur.com/mZdAQvO.jpg", "http://i.imgur.com/mZdAQvO.jpg", 
-				"http://i.imgur.com/mZdAQvO.jpg"]
-	}
-
-	]
-}
-
-var skillcount = 0;
-if ( bio.skills.length > 0) {
-	 $("#header").append(HTMLskillsStart);
-	while ( skillcount < bio.skills.length) {
-		var formattedSkill = HTMLskills.replace("%data%", bio.skills[skillcount]);
-		$("#skills").append(formattedSkill);
-		skillcount = skillcount + 1;
-	}
-}
-
-function displayWork() {
-	for ( jobcounter in work.jobs) {
+			],
+		display: function(){
+			for ( jobcounter in work.jobs) {
 		$("#workExperience").append(HTMLworkStart);
 
 		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[jobcounter].employer);
@@ -139,57 +136,67 @@ function displayWork() {
 	 	var formattedDescription= HTMLworkDescription.replace("%data%", work.jobs[jobcounter].description);
 		$(".work-entry:last").append(formattedDescription);
 
+		}
 	}
 }
-displayWork();
 
-function displayProjects() {
-	for ( project in projects.projects) {
-		$("#projects").append(HTMLprojectStart);
-
-		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-			$(".project-entry:last").append(formattedTitle);
-		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-			$(".project-entry:last").append(formattedDates);
-		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-			$(".project-entry:last").append(formattedDescription);
-
-		if (projects.projects[project].images.length > 0){
-			for (image in projects.projects[project].images){
-				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
-				$(".project-entry:last").append(formattedImage);
-			}
-		}
-	
-
+var projects = {
+	"projects" : [
+	{
+		"title" : "Technology Consultant for Bespoke Delivery",
+		"dates" : "October 2014 - Ongoing",
+		"description" : "Developed online ordering system for start up Bespoke Delivery, a meal delivery service on bicycles",
+		"images" : ["http://i.imgur.com/Wfr9NXC.gif", "http://i.imgur.com/Wfr9NXC.gif", 
+				"http://i.imgur.com/Wfr9NXC.gif"]
+	},
+	{
+		"title" : "I Pet A Dog",
+		"dates" : "August 2014 - December 2014",
+		"description" : "Recorded my own album. The theme? Children's music of course! It's about petting dogs and zoos and snowpants.",
+		"images" : ["https://f1.bcbits.com/img/a3479605292_10.jpg"]
 	}
 
-}
-displayProjects();
+	],
+	display: function(){
+		for ( project in projects.projects) {
+			$("#projects").append(HTMLprojectStart);
 
-function displayEducation() {
-	for ( counter in education.schools) {
-		$("#education").append(HTMLschoolStart);
+			var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+				$(".project-entry:last").append(formattedTitle);
+			var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+				$(".project-entry:last").append(formattedDates);
+			var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+				$(".project-entry:last").append(formattedDescription);
 
-		var formattedSchool = HTMLschoolName.replace("%data%", education.schools[counter].name);
-			$(".education-entry:last").append(formattedSchool);
-		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[counter].degree);
-			$(".education-entry:last").append(formattedDegree);
-		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[counter].dates);
-			$(".education-entry:last").append(formattedDates);
-	 	var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[counter].location);
-			$(".education-entry:last").append(formattedLocation);
-
-		if (education.schools[counter].majors.length > 0){
-			for (major in education.schools[counter].majors){
-				var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[counter].majors[major]);
-				$(".education-entry:last").append(formattedMajor);
+			if (projects.projects[project].images.length > 0){
+				for (image in projects.projects[project].images){
+					var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+					$(".project-entry:last").append(formattedImage);
+				}
 			}
-		}
 		
+
+		}
+	}
+};
+
+
+var skillcount = 0;
+if ( bio.skills.length > 0) {
+	 $("#header").append(HTMLskillsStart);
+	while ( skillcount < bio.skills.length) {
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[skillcount]);
+		$("#skills").append(formattedSkill);
+		skillcount = skillcount + 1;
 	}
 }
-displayEducation();
+
+education.display();
 
 $("#mapDiv").append(googleMap);
 
+
+
+projects.display();
+work.display();
+bio.display();
